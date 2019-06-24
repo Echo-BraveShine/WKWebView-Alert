@@ -149,38 +149,4 @@ static NSString *kWKActionSheetMode = @"kWKActionSheetMode";
 }
 
 
--(void)logRuntimePropertyWith:(Class) cls;
-{
-    NSLog(@"class--%@",cls);
-    unsigned int count = 0;
-    
-    Ivar *ivars = class_copyIvarList(cls, &count);
-    
-    for (int i = 0; i<count; i++) {
-        // 取出成员变量
-        Ivar ivar = *(ivars + i);
-        
-        // 打印成员变量名字
-        NSLog(@"name-->%s", ivar_getName(ivar));
-        
-        // 打印成员变量的数据类型
-        NSLog(@"type-->%s", ivar_getTypeEncoding(ivar));
-    }
-    
-    unsigned int methCount = 0;
-    
-    Method *meths = class_copyMethodList(cls, &methCount);
-    
-    for(int i = 0; i < methCount; i++) {
-        
-        Method meth = meths[i];
-        
-        SEL sel = method_getName(meth);
-        
-        const char *name = sel_getName(sel);
-        
-        NSLog(@"method--%s", name);
-    }
-    
-}
 @end
